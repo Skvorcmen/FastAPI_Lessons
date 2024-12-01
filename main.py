@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.params import Depends
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
-
+#from router import router as tasks_router
 from sqlalchemy.testing.util import drop_all_tables
 
 from database import create_tables, delete_tables
@@ -12,16 +12,16 @@ from database import create_tables, delete_tables
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await drop_all_tables()
+    await delete_tables()
     print("База очищена")
     await create_tables()
     print("База готова")
     yield
     print("выключение")
-    ml_models.clear()
+
 
 app = FastAPI(lifespan=lifespan)
-
+app.include_router(tasks_router)
 
 
 
