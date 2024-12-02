@@ -4,9 +4,6 @@ from fastapi import FastAPI
 from fastapi.params import Depends
 from pydantic import BaseModel
 from contextlib import asynccontextmanager
-#from router import router as tasks_router
-from sqlalchemy.testing.util import drop_all_tables
-
 from database import create_tables, delete_tables
 
 
